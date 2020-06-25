@@ -4,8 +4,8 @@ if ActiveRecord::Migrator.needs_migration?
   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
 end
 
-use RACK::MethodOverride
-use MoviesController
+run ApplicationController
+use Rack::MethodOverride
+use FilmsController
 use ReviewsController
 use UsersController
-run ApplicationController

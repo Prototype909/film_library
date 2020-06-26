@@ -1,5 +1,7 @@
 <p><%= @film.title %>
-<form method="post" action="/films/<%=@film.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete film">
+<form method="post" action="/reviews">
+
+  <input type="submit" value="Add Review">
+  <input type="submit" value="Edit Review">
+  <input type="submit" value="Delete Review">
 </form>

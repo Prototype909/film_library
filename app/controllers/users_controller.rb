@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
     post '/login' do
         user = User.find_by_name(params[:name])
+        binding.pry
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
             redirect to "/films"

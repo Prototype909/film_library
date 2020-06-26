@@ -13,14 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20200624230701) do
 
-  create_table "films", force: :cascade do |t| #maybe should belong to a user
+  create_table "films", force: :cascade do |t|
     t.string "title"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.string  "description"
     t.integer "film_id"
-    t.integer "review_id" #change to user_id
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

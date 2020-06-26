@@ -1,8 +1,15 @@
-<p><%= @film.content %>
+Welcome!
+<h2> Film List </h2>
+<% @film.each do |c| %>
 
-<form method="post" action="/films/<%=@film.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete film">
-</form>
+ <div>
+<li><a href="/films/<%= c.id %>"><%= c.title %></a></li>
 
-<a href="/film/<%=@film.id%>/edit">Edit film </a>
+
+
+
+ </div>
+<% end %>
+
+
+<a href="/films/new" > Add a film </a>

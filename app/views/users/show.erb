@@ -1,0 +1,6 @@
+<p> Here are your films, <%= @user.username %>
+<% @user.films.each do |film| %>
+  <div>
+    <%= film.content %>
+  </div>
+<% end %>

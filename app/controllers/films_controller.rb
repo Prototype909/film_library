@@ -52,14 +52,14 @@ class FilmsController < ApplicationController
       end
     end
 
-    patch '/films/:id' do
+    patch '/films/:id/edit' do
       if logged_in?
         if params[:title] == ""
           redirect to "/films/#{params[:id]}/edit"
         else
           @film = Film.find_by_id(params[:id])
-          if @film && @film.user == current_user
-            if @film.update(title: params[:title])
+          if @film && @film.user_id == current_user.id
+            if @film.update(title: params[:title], user_id: current_user.id)
               redirect to "/films/#{@film.id}"
             else
               redirect to "/films/#{@film.id}/edit"
@@ -72,8 +72,14 @@ class FilmsController < ApplicationController
         redirect to "/login"
       end
     end
-  # delete 'films/:id' do
-  #   film = Film.find_by_id(params[:id])
-  #
-  # end
+
+   delete 'films/:id/delete' do
+     if logged_in?
+       @film = Film.find_by_id(params[:id])
+     if @film && @film.user_id == current_user.id
+        @film.delete
+      end
+        redirect to "/films"
+      end
+   end
 end

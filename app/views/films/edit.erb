@@ -4,3 +4,9 @@
   <input type="text" name="title" value="<%= @film.title %>" placeholder="<%= @film.title %>">
     <input type="submit" value="submit">
 </form>
+
+<form method="post" action="/films/<%=@film.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="text" name="title" value="<%= @film.title %>" placeholder="<%= @film.title %>">
+  <input type="submit" value="Delete">
+</form>

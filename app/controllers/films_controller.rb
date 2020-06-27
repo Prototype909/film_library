@@ -73,13 +73,14 @@ class FilmsController < ApplicationController
       end
     end
 
-   delete 'films/:id/delete' do
+   delete '/films/:id/delete' do
      if logged_in?
        @film = Film.find_by_id(params[:id])
-     if @film && @film.user_id == current_user.id
+     if @film && @film.user.id == current_user.id
         @film.delete
       end
         redirect to "/films"
+      else redirect to "/logged_in"
       end
    end
 end

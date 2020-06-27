@@ -9,6 +9,10 @@ class FilmsController < ApplicationController
     end
   end
 
+  get '/films/new' do
+    erb :'films/new'
+  end
+
   post '/films' do
     if logged_in?
     if params[:title] == ""
@@ -26,10 +30,6 @@ class FilmsController < ApplicationController
     end
   end
 
-  get '/films/new' do
-    erb :'films/new'
-  end
-
   get '/films/:id' do
     if logged_in?
       @film = Film.find_by_id(params[:id])
@@ -38,4 +38,42 @@ class FilmsController < ApplicationController
       redirect '/login'
     end
   end
+
+  get '/films/:id/edit' do
+    if logged_in?
+      @film = Film.find_by_id(params[:id])
+      if @film && @film.user == current_user
+        erb :'films/edit'
+      else
+        redirect to '/films'
+      end
+      else
+        redirect to '/login'
+      end
+    end
+
+    patch '/films/:id' do
+      if logged_in?
+        if params[:title] == ""
+          redirect to "/films/#{params[:id]}/edit"
+        else
+          @film = Film.find_by_id(params[:id])
+          if @film && @book.user == current_user
+            if @book.update(title: params[:title])
+              redirect to "/films/#{@film.id}"
+            else
+              redirect to "/films/#{@film.id}/edit"
+            end
+          else
+            redirect to "/films"
+          end
+        end
+      else
+        redirect to "/login"
+      end
+    end
+  # delete 'films/:id' do
+  #   film = Film.find_by_id(params[:id])
+  #
+  # end
 end

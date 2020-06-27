@@ -15,16 +15,16 @@ class FilmsController < ApplicationController
 
   post '/films' do
     if logged_in?
-    if params[:title] == ""
-      redirect to "/films/new"
-    else
-      @film = Film.create(title: params[:title], user_id: current_user.id)
-    if @film.save
-      redirect to "/films/#{@film.id}"
-    else
-      redirect to "/films/new"
-    end
-  end
+      if params[:title] == ""
+        redirect to "/films/new"
+      else
+        @film = Film.create(title: params[:title], user_id: current_user.id)
+        if @film.save
+          redirect to "/films/#{@film.id}"
+        else
+          redirect to "/films/new"
+        end
+      end
     else
       redirect to '/login'
     end
@@ -75,12 +75,12 @@ class FilmsController < ApplicationController
 
    delete '/films/:id/delete' do
      if logged_in?
-       @film = Film.find_by_id(params[:id])
-     if @film && @film.user.id == current_user.id
-        @film.delete
-      end
-        redirect to "/films"
-      else redirect to "/logged_in"
+        @film = Film.find_by_id(params[:id])
+       if @film && @film.user.id == current_user.id
+          @film.delete
+        end
+          redirect to "/films"
+        else redirect to "/logged_in"
       end
    end
 end

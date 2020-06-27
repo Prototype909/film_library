@@ -1,12 +1,2 @@
 <p><%= @film.title %><br>
-#here are some reviews
-#write code to show reviews
-
-
-
-
-
-<form method="post" action="/films/edit">
-  <input type="submit" value="Edit Film">
-  <input type="submit" value="Delete Film">
-</form>
+<a href="/films/<%= @film.id %>/edit">edit</a>

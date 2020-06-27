@@ -18,7 +18,7 @@ class FilmsController < ApplicationController
     if params[:title] == ""
       redirect to "/films/new"
     else
-      @film = Film.create(title: params[:title])
+      @film = Film.create(title: params[:title], user_id: current_user.id)
     if @film.save
       redirect to "/films/#{@film.id}"
     else
@@ -58,8 +58,8 @@ class FilmsController < ApplicationController
           redirect to "/films/#{params[:id]}/edit"
         else
           @film = Film.find_by_id(params[:id])
-          if @film && @book.user == current_user
-            if @book.update(title: params[:title])
+          if @film && @film.user == current_user
+            if @film.update(title: params[:title])
               redirect to "/films/#{@film.id}"
             else
               redirect to "/films/#{@film.id}/edit"

@@ -33,7 +33,11 @@ class FilmsController < ApplicationController
   get '/films/:id' do
     if logged_in?
       @film = Film.find_by_id(params[:id])
-      erb :'/films/show'
+      if @film
+       erb :'/films/show'
+      else 
+        redirect to '/films'
+      end
     else
       redirect '/login'
     end

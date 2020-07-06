@@ -9,6 +9,11 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "SESSION_SECRET"
   end
 
+  not_found do
+    status 404
+    erb :error
+  end
+
   get "/" do
     if logged_in?
       redirect '/films'

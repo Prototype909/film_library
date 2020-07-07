@@ -13,7 +13,7 @@ class FilmsController < ApplicationController
   end
 
   post '/films' do
-    if logged_in?
+    redirect_if_not_logged_in
       if params[:title] == ""
         redirect to "/films/new"
       else
@@ -24,34 +24,26 @@ class FilmsController < ApplicationController
           redirect to "/films/new"
         end
       end
-    else
-      redirect to '/login'
     end
-  end
 
   get '/films/:id' do
-    if logged_in?
+    redirect_if_not_logged_in
       @film = Film.find_by_id(params[:id])
+      #binding.pry
       if @film
        erb :'/films/show'
       else 
         redirect to '/films'
       end
-    else
-      redirect '/login'
     end
-  end
 
   get '/films/:id/edit' do
-    if logged_in?
+    redirect_if_not_logged_in
       @film = Film.find_by_id(params[:id])
       if @film && @film.user_id == current_user.id
         erb :'films/edit'
       else
         redirect to '/films'
-      end
-      else
-        redirect to '/login'
       end
     end
 

@@ -1,16 +1,15 @@
 class FilmsController < ApplicationController
 
   get '/films' do
-    if logged_in?
+    redirect_if_not_logged_in
       @film = Film.all
-      erb :'/films/index'
-    else
-      redirect to '/login'
-    end
+      erb :'/films/index'  
   end
 
   get '/films/new' do
-    erb :'films/new'
+    redirect_if_not_logged_in
+             erb :'films/new'
+
   end
 
   post '/films' do
@@ -63,7 +62,7 @@ class FilmsController < ApplicationController
         else
           @film = Film.find_by_id(params[:id])
           if @film && @film.user_id == current_user.id
-            if @film.update(title: params[:title], user_id: current_user.id)
+            if @film.update(title: params[:title])
               redirect to "/films/#{@film.id}"
             else
               redirect to "/films/#{@film.id}/edit"

@@ -17,9 +17,11 @@
     <div class="wrapper">
       <div class="topnav">
       <% if logged_in?%>
-      Logged in as <%=current_user.name.upcase %><br>
-      <a href="/logout">Log Out</a></p>
+   
+      <a href="/logout">Log Out</a>
       <a href="/films">Films</a>
+      <a href="/show">Your Films</a>
+      <a href="/films/new" > Add a film </a>
       <% else %>
       <% end %>
       

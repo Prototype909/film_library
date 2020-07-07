@@ -16,8 +16,14 @@
   <body>
     <div class="wrapper">
       <div class="topnav">
+      <% if logged_in?%>
+      Logged in as <%=current_user.name.upcase %><br>
+      <a href="/logout">Log Out</a></p>
       <a href="/films">Films</a>
-  <a href="/logout">logout</a>
+      <% else %>
+      <% end %>
+      
+
 </div>
         <%= yield %>
 

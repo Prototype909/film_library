@@ -1,6 +1,6 @@
-<p> Here are your films, <%= @user.username %>
+<p> Here are your films, <%= @user.name %>
 <% @user.films.each do |film| %>
   <div>
-    <%= film.content %>
+  <a href =/films/<%=film.id%>><%= film.title %></a>
   </div>
 <% end %>

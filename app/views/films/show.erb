@@ -1,7 +1,9 @@
 <br><p>Film: <%= @film.title %><br><br>
+<%if @film.user.name == current_user.name%>
 <a href="/films/<%= @film.id %>/edit">edit</a>
-<!-- <a href="/films/<%= @film.id %>/delete">delete</a> -->
 <form method="post" action="/films/<%=@film.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete">
 </form>
+<%else%>
+<%end%>

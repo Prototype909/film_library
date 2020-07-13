@@ -48,7 +48,7 @@ class FilmsController < ApplicationController
     end
 
     patch '/films/:id/edit' do
-      if logged_in?
+      redirect_if_not_logged_in
         if params[:title] == ""
           redirect to "/films/#{params[:id]}/edit"
         else
@@ -69,7 +69,7 @@ class FilmsController < ApplicationController
     end
 
    delete '/films/:id/delete' do
-     if logged_in?
+    redirect_if_not_logged_inss
         @film = Film.find_by_id(params[:id])
        if @film && @film.user.id == current_user.id
           @film.delete

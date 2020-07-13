@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     get '/signup' do
-        redirect_if_not_logged_in
+        if !logged_in?
           erb :'users/signup'
         else
           redirect to '/films'
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-        redirect_if_not_logged_in
+        if !logged_in?
             erb :'users/login'
         else
             redirect to '/films'

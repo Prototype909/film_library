@@ -63,19 +63,14 @@ class FilmsController < ApplicationController
             redirect to "/films"
           end
         end
-      else
-        redirect to "/login"
-      end
     end
 
    delete '/films/:id/delete' do
-    redirect_if_not_logged_inss
+    redirect_if_not_logged_in
         @film = Film.find_by_id(params[:id])
        if @film && @film.user.id == current_user.id
           @film.delete
         end
           redirect to "/films"
-        else redirect to "/logged_in"
-      end
    end
 end
